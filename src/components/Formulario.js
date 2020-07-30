@@ -10,8 +10,12 @@ const Formulario = () => {
     sintomas:""
   })
 
-  const handleChange = ()=>{
-    console.log("escribiendo...")
+  //
+  const handleChange = (e)=>{
+    setCita({
+      ...cita,
+      [e.target.name]: e.target.value
+    })
   }
   return (
     <>
