@@ -1,26 +1,50 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const Formulario = () => {
-
   const [cita, setCita] = useState({
-    mascota:"",
-    propietario:"",
-    fecha:"",
-    hora:"",
-    sintomas:""
-  })
+    mascota: "",
+    propietario: "",
+    fecha: "",
+    hora: "",
+    sintomas: "",
+  });
 
-  //
-  const handleChange = (e)=>{
+  const [error, setError] = useState(false);
+
+  const handleChange = (e) => {
     setCita({
       ...cita,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const { mascota, propietario, fecha, hora, sintomas } = cita;
+
+  const handleSumbit = (e) => {
+    e.preventDefault();
+
+    //Validar
+    if (
+      mascota.trim() === "" ||
+      propietario.trim() === "" ||
+      fecha.trim() === "" ||
+      hora.trim() === "" ||
+      sintomas.trim() === ""
+    ) {
+      setError(true);
+      return;
+    }
+    //asignar un ID
+
+    //Crear la cita
+
+    //reiniciar el form
+  };
   return (
     <>
       <h2>Crear Cita</h2>
-      <form>
+      {error ? <p className="alerta-error">Todos los campos tienen que estar rellenos.</p>: null}
+      <form onSubmit={handleSumbit}>
         <label>Nombre Mascota</label>
         <input
           type="text"
@@ -28,6 +52,7 @@ const Formulario = () => {
           className="u-full-width"
           placeholder="Nombre Mascota"
           onChange={handleChange}
+          value={mascota}
         />
         <label>Nombre Dueño</label>
         <input
@@ -36,6 +61,7 @@ const Formulario = () => {
           className="u-full-width"
           placeholder="Nombre Dueño de la Mascota"
           onChange={handleChange}
+          value={propietario}
         />
         <label>Fecha</label>
         <input
@@ -43,6 +69,7 @@ const Formulario = () => {
           name="fecha"
           className="u-full-width"
           onChange={handleChange}
+          value={fecha}
         />
         <label>Hora</label>
         <input
@@ -50,17 +77,18 @@ const Formulario = () => {
           name="hora"
           className="u-full-width"
           onChange={handleChange}
+          value={hora}
         />
         <label>Sintomas</label>
         <textarea
           name="sintomas"
           className="u-full-width"
           onChange={handleChange}
+          value={sintomas}
         ></textarea>
-        <button
-          type="submit" 
-          className="u-full-width button-primary"
-        >Agregar Cita</button>
+        <button type="submit" className="u-full-width button-primary">
+          Agregar Cita
+        </button>
       </form>
     </>
   );
