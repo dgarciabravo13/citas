@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuid } from 'uuid';
 
-const Formulario = () => {
+const Formulario = ({agregarCita}) => {
   const [cita, setCita] = useState({
     mascota: "",
     propietario: "",
@@ -39,10 +39,16 @@ const Formulario = () => {
     setError(false);
     //asignar un ID
     cita.id = uuid();
-    console.log(cita);
     //Crear la cita
-
+    agregarCita(cita);
     //reiniciar el form
+    setCita({
+      mascota: "",
+      propietario: "",
+      fecha: "",
+      hora: "",
+      sintomas: "",
+    })
   };
   return (
     <>
