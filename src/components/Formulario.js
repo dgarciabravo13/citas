@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuid } from 'uuid';
 
 const Formulario = () => {
   const [cita, setCita] = useState({
@@ -34,8 +35,11 @@ const Formulario = () => {
       setError(true);
       return;
     }
-    //asignar un ID
 
+    setError(false);
+    //asignar un ID
+    cita.id = uuid();
+    console.log(cita);
     //Crear la cita
 
     //reiniciar el form
